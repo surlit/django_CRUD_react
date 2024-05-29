@@ -1,12 +1,27 @@
-import {React,useEffect} from 'react'
-import getAllTasks from '../api/tasks.api'
+import {React,useEffect, useState} from 'react'
+import TasksCard from './TasksCard'
+import { getAllTasks } from '../api/tasks.api';
+
+
 export default function TasksList() {
+    const [tasksState,setTasks] = useState([])
     useEffect(() => {
-        console.log("pagina Cargada");
+        async function  loadTasks() {
+            const res = await getAllTasks();
+            setTasks(res.data)
+        }
+        loadTasks();
     }, []);
   return (
+    <>
     <div>
-        <h1>TasksList</h1>
+        
     </div>
+        {tasksState.map(task => (
+            <TasksCard  
+            data={task}
+        />
+        ))}
+    </>
   )
 }
