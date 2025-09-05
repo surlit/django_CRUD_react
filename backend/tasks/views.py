@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import RedirectView
 from rest_framework import viewsets
 from .serializer import TaskSerializer
 from .models import Task
@@ -6,4 +7,6 @@ from .models import Task
 class TaskView(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     queryset = Task.objects.all()
+class HomeRedirectView(RedirectView):
+    url = '/docs/'
     

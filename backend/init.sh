@@ -28,6 +28,12 @@ echo "Realizando migraciones..."
 python manage.py makemigrations
 python manage.py migrate
 
+# Solicitar el puerto para levantar Django
+read -p "Introduce el puerto en el que deseas levantar Django (por defecto 8000): " PUERTO
+
+# Si no se introduce ningún puerto, usar 8001 como valor por defecto
+PUERTO=${PUERTO:-8000}
+
 # Levantar Django
-echo "Levantando el servidor de Django en el puerto 8001..."
-python manage.py runserver 8001
+echo "Levantando el servidor de Django en el puerto $PUERTO..."
+python manage.py runserver "$PUERTO"
